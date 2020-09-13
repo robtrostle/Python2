@@ -1,24 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[35]:
+# In[1]:
 
 
-# userString = [[]]
-# userString = list(input("Please enter 100 1s and/or zeros to display a 10 by 10 sized icon. Ones will be displayed as * and Zeros will be displayed as empty spaces: "))
-
-# lst = [ ] 
-# n = int(input("Enter number of elements : "))  
-# for i in range(0, n): 
-#     ele = [input(), int(input())] 
-#     lst.append(ele) 
-      
-# print(lst)
-
-
-# In[36]:
-
-
+import contextlib
 icon = [[0,0,0,0,0,0,0,0,0,0],
         [1,0,0,0,0,0,0,0,0,1],
         [1,1,0,0,0,0,0,0,1,1],
@@ -31,7 +17,7 @@ icon = [[0,0,0,0,0,0,0,0,0,0],
         [1,1,1,0,0,0,0,1,1,1]]
 
 
-# In[37]:
+# In[5]:
 
 
 # printIcon() iterates over the icon list of lists and converts characters from binary to * and blank space for 0.
@@ -52,20 +38,20 @@ def enlargeIcon():
             elif item == 0:
                     print("   ", end=" ")
         print()
-def displayUserIcon(userString):
-    for row in userString:
-        for item in row:
-            if item == '1':
-                    print("*", end=" ")
-            elif item == '0':
-                    print(" ", end=" ")
-                    
-        print()
+#generateTxtFile will ask user to name their txt file and then generate a txt file in local directory based on name. 
+def generateTxtFile():
+    iconName = input("This app will create a text file of the chosen icon.\n"
+                     "Please pick a name: ") or 'icon.txt'
+    with open(iconName + '.txt', 'w') as f:
+        with contextlib.redirect_stdout(f):
+            displayIcon()
+        print(iconName + ".txt has been generated.")
+
 def main():
     displayIcon()
     enlargeIcon()
-    displayUserIcon(userString)
-       
+    generateTxtFile()
+           
 if __name__ == '__main__':
     main()
 
