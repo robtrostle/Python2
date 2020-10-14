@@ -4,29 +4,23 @@
 
 
 ```python
+%matplotlib inline
 import requests,json
 import pandas as pd
+from IPython.display import Image
 #use requests to issue a request to a remote host. Choose the appropriate http method by calling the corresponding 
 #function on the module. 
-#resp = requests.get('https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_hostname,ra,dec&order=dec&format=json')
 resp = requests.get('https://api.nasa.gov/planetary/apod?api_key=RcDlBrpTe5hIcYRzarcCeyiUhNWcooWMrpqhAL0e')
-
-print(resp.status_code)
-print(resp)
-print(resp.text)
+#Get status code
+print(resp,'\n')
 #get headers
 if(int(resp.status_code)==200):
-    print(resp.text)
     payload = json.loads(resp.text)#loads is load string
-    for k in payload:
-        print(k)
+    for key in payload:
+        print(key)
 ```
 
-    200
-    <Response [200]>
-    {"copyright":"Cem \u00d6zkeser","date":"2020-10-13","explanation":"Three very different -- and very famous -- objects were all captured in a single frame last month. On the upper left is the bright blue Pleiades, perhaps the most famous cluster of stars on the night sky.  The Pleiades (M45) is about 450 light years away and easily found a few degrees from Orion.  On the upper right is the expansive Andromeda Galaxy, perhaps the most famous galaxy -- external to our own -- on the night sky.  Andromeda (M31) is one of few objects visible to the unaided eye where you can see light that is millions of years old.  In the middle is bright red Mars, perhaps the most famous planet on the night sky. Today Mars is at opposition, meaning that it is opposite the Sun, with the result that it is visible all night long.  In the foreground is an ancient tomb in the Phygrian Valley in Turkey.  The tomb, featuring two stone lions, is an impressive remnant of a powerful civilization that lived thousands of years ago.  Mars, currently near its brightest, can be easily found toward the east just after sunset.","hdurl":"https://apod.nasa.gov/apod/image/2010/MarsTriangle_Ozkeser_3516.jpg","media_type":"image","service_version":"v1","title":"Mars, Pleiades, and Andromeda over Stone Lions","url":"https://apod.nasa.gov/apod/image/2010/MarsTriangle_Ozkeser_960.jpg"}
-    
-    {"copyright":"Cem \u00d6zkeser","date":"2020-10-13","explanation":"Three very different -- and very famous -- objects were all captured in a single frame last month. On the upper left is the bright blue Pleiades, perhaps the most famous cluster of stars on the night sky.  The Pleiades (M45) is about 450 light years away and easily found a few degrees from Orion.  On the upper right is the expansive Andromeda Galaxy, perhaps the most famous galaxy -- external to our own -- on the night sky.  Andromeda (M31) is one of few objects visible to the unaided eye where you can see light that is millions of years old.  In the middle is bright red Mars, perhaps the most famous planet on the night sky. Today Mars is at opposition, meaning that it is opposite the Sun, with the result that it is visible all night long.  In the foreground is an ancient tomb in the Phygrian Valley in Turkey.  The tomb, featuring two stone lions, is an impressive remnant of a powerful civilization that lived thousands of years ago.  Mars, currently near its brightest, can be easily found toward the east just after sunset.","hdurl":"https://apod.nasa.gov/apod/image/2010/MarsTriangle_Ozkeser_3516.jpg","media_type":"image","service_version":"v1","title":"Mars, Pleiades, and Andromeda over Stone Lions","url":"https://apod.nasa.gov/apod/image/2010/MarsTriangle_Ozkeser_960.jpg"}
+    <Response [200]> 
     
     copyright
     date
@@ -38,7 +32,36 @@ if(int(resp.status_code)==200):
     url
     
 
-![](https://apod.nasa.gov/apod/image/2010/MarsTriangle_Ozkeser_960.jpg)
+
+```python
+#Assign image url within json dict to image, assign explantion to variable caption to view below after displaying image. 
+image = payload['url']
+caption = payload['explanation']
+title = payload['title']
+```
+
+
+```python
+Image(image)
+```
+
+
+
+
+![jpeg](output_4_0.jpg)
+
+
+
+
+```python
+print("Title: "+title,'\n')
+print(caption)
+```
+
+    Title: The Colorful Clouds of Rho Ophiuchi 
+    
+    The many spectacular colors of the Rho Ophiuchi (oh'-fee-yu-kee) clouds highlight the many processes that occur there.  The blue regions shine primarily by reflected light.  Blue light from the  Rho Ophiuchi star system and nearby stars reflects more efficiently off this portion of the nebula than red light.  The Earth's daytime sky appears blue for the same reason.  The red and yellow regions shine primarily because of emission from the nebula's atomic and molecular gas.  Light from nearby blue stars - more energetic than the bright star  Antares - knocks electrons away from the gas, which then shines when the electrons recombine with the gas.  The dark brown regions are caused by dust grains - born in young stellar atmospheres - which effectively block light emitted behind them.  The Rho Ophiuchi star clouds, well in front of the globular cluster M4 visible here on the upper right, are even more colorful than humans can see - the clouds emits light in every wavelength band from the radio to the gamma-ray.   Astrophysicists: Browse 2,200+ codes in the Astrophysics Source Code Library
+    
 
 
 ```python
