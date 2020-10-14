@@ -16,6 +16,7 @@ print(resp,'\n')
 #get headers
 if(int(resp.status_code)==200):
     payload = json.loads(resp.text)#loads is load string
+    #print(resp.text)
     for key in payload:
         print(key)
 ```
@@ -42,15 +43,10 @@ title = payload['title']
 
 
 ```python
-Image(image)
+#Image(image) using markdown cell to diplay image for git. Use this code otherwise. 
 ```
 
-
-
-
-![jpeg](output_4_0.jpg)
-
-
+![](https://apod.nasa.gov/apod/image/2010/RhoAntares_Abolfath_3000.jpg)
 
 
 ```python
